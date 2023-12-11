@@ -33,11 +33,11 @@ def test():
     #return "Test" # testing 
     return(get_api_key())
 
-@app.route("/add",methods=['GET','POST'])
+@app.route("/add",methods=['POST'])
 def add():
-  if request.method=='GET':
-    return "Use post to add" # replace with form template
-  else:
+  # if request.method=='GET':
+  #   return "Use post to add" # replace with form template
+  # else:
     token=get_api_key()
     ret = addWorker(token,request.form['num'])
     return ret
