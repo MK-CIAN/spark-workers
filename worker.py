@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from flask import render_template
 import requests
 import os
 import json
@@ -26,7 +27,7 @@ def get_api_key() -> str:
       
 @app.route("/")
 def hello():
-    return "Add workers to the Spark cluster with a POST request to add"
+    return render_template('index.html')
 
 @app.route("/test")
 def test():
