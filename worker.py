@@ -1,6 +1,5 @@
 from flask import Flask
 from flask import request
-from flask import render_template
 import requests
 import os
 import json
@@ -45,19 +44,19 @@ def add():
 
 
 def addWorker(token, num):
-    with open('payload.json') as p:
-        tdata =json.load(p)
+     with open('payload.json') as p:
+      tdata=json.load(p)
     tdata['name']='slave'+str(num)
     data=json.dumps(tdata)
     url='https://www.googleapis.com/compute/v1/projects/even-trainer-401512/zones/europe-west1-b/instances'
-    
-   headers={"Authorization": "Bearer "+token}
+    headers={"Authorization": "Bearer "+token}
     resp=requests.post(url,headers=headers, data=data)
     if resp.status_code==200:     
       return "Done"
     else:
       print(resp.content)
       return "Error\n"+resp.content.decode('utf-8') + '\n\n\n'+data
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port='8080')
