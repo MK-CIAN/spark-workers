@@ -3,17 +3,17 @@ from flask import request
 import requests
 import os
 import json
-from google.cloud import secretmanager_v1
+from google.cloud import secretmanager
 app = Flask(__name__)
 
 def get_api_key() -> str:
     #secret = os.environ.get("compute-api-key ")
-    project_id = "655129271851"
-    secret_id = "compute-api-key"
+    #project_id = "655129271851"
+    #secret_id = "compute-api-key"
     
-    client = secretmanager_v1.SecretManagerServiceClient()
+    client = secretmanager.SecretManagerServiceClient()
     
-    name = f"projects/{project_id}/secrets/{secret_id}/versions/latest"
+    name = projects/655129271851/secrets/compute-api-key
     response = client.access_secret_version(name=name)
     
     return response.payload.data.decode("UTF-8")
@@ -36,9 +36,9 @@ def test():
 @app.route("/add",methods=['GET','POST'])
 def add():
   if request.method=='GET':
-    return "Use post to add" # replace with form template
+    return render_template('index.html')
   else:
-    token= get_api_key()
+    token=access_secret_version("compute-api-key")
     ret = addWorker(token,request.form['num'])
     return ret
 
