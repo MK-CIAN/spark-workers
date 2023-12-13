@@ -11,7 +11,7 @@ def access_secret_version(secret_id, version_id="latest"):
     client = secretmanager.SecretManagerServiceClient()
 
     # Build the resource name of the secret version.
-    name = f"projects/65512927185/secrets/{secret_id}/versions/{version_id}"
+    name = f"projects/655129271851/secrets/{secret_id}/versions/{version_id}"
 
     # Access the secret version.
     response = client.access_secret_version(name=name)
