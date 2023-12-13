@@ -6,14 +6,22 @@ import json
 app = Flask(__name__)
 
 def get_api_key() -> str:
-    secret = os.environ.get("compute-api-key ")
+    #secret = os.environ.get("compute-api-key ")
+    project_id = "655129271851"
+    secret_id = "compute-api-key"
     
-    if secret:
-        return secret
-    else:
-        #local testing
-        with open('.key') as f:
-            return f.read()
+    client = secretmanager_v1.SecretManagerServiceClient()
+    
+    name = f"projects/{project_id}/secrets/{secret_id}/versions/latest"
+    response = client.access_secret_version(name=name)
+    
+    return response.payload.data.decode("UTF-8")
+    # if secret:
+    #     return secret
+    # else:
+    #     #local testing
+    #     with open('.key') as f:
+    #         return f.read()
       
 @app.route("/")
 def hello():
