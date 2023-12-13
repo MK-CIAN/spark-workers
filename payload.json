@@ -14,7 +14,7 @@
         "diskSizeGb": "10",
         "diskType": "projects/even-trainer-401512/zones/us-west4-b/diskTypes/pd-balanced",
         "labels": {},
-        "sourceImage": "projects/debian-cloud/global/images/debian-11-bullseye-v20221102"
+        "sourceImage": "projects/ubuntu-os-cloud/global/images/ubuntu-2004-focal-v20231130"
       },
       "mode": "READ_WRITE",
       "type": "PERSISTENT"
