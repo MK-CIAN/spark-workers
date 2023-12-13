@@ -33,13 +33,13 @@ def test():
     #return "Test" # testing 
     return(get_api_key())
 
-@app.route("/add",methods=['GET','POST'])
+@app.route("/add",methods=['POST'])
 def add():
-  if request.method=='GET':
-    return render_template('index.html')
-  else:
+  #if request.method=='GET':
+  #  return render_template('index.html')
+  #else:
     token=access_secret_version("compute-api-key")
-    ret = addWorker(token,request.form['num'])
+    ret = addWorker(token, request.form['num'])
     return ret
 
 def addWorker(token, num):
