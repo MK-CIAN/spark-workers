@@ -3,32 +3,22 @@ from flask import request
 import requests
 import os
 import json
+from google.cloud import secretmanager
 app = Flask(__name__)
 
-def get_api_key() -> str:
-    secret = os.environ.get("compute-api-key")
-    if secret:
-        return secret
-    else:
-        #local testing
-        with open('.key') as f:
-            return f.read()
-    #secret = os.environ.get("compute-api-key ")
-    #project_id = "655129271851"
-    #secret_id = "compute-api-key"
-    
-    #client = secretmanager.SecretManagerServiceClient()
-    
-    #name = "projects/655129271851/secrets/compute-api-key/versions/1"
-    #response = client.access_secret_version(name=name)
-    
-    
-    # if secret:
-    #     return secret
-    # else:
-    #     #local testing
-    #     with open('.key') as f:
-    #         return f.read()
+def access_secret_version(secret_id, version_id="latest"):
+    # Create the Secret Manager client.
+    client = secretmanager.SecretManagerServiceClient()
+
+    # Build the resource name of the secret version.
+    name = f"projects/65512927185/secrets/{secret_id}/versions/{version_id}"
+
+    # Access the secret version.
+    response = client.access_secret_version(name=name)
+
+    # Return the decoded payload.
+    return response.payload.data.decode('UTF-8')
+
       
 @app.route("/")
 def hello():
@@ -37,15 +27,14 @@ def hello():
 @app.route("/test")
 def test():
     #return "Test" # testing 
-    return(get_api_key())
+    return(access_secret_version("compute-api-key"))
 
 @app.route("/add",methods=['GET','POST'])
 def add():
   if request.method=='GET':
     return "Use post to add" # replace with form template
   else:
-    token=get_api_key()
-    token=token.strip("\n")
+    token=access_secret_version("compute-api-key")
     ret = addWorker(token,request.form['num'])
     return ret
 
