@@ -33,14 +33,15 @@ def test():
     #return "Test" # testing 
     return(get_api_key())
 
-@app.route("/add",methods=['POST'])
+@app.route("/add",methods=['GET','POST'])
 def add():
-  #if request.method=='GET':
-  #  return render_template('index.html')
-  #else:
+  if request.method=='GET':
+    return "Use post to add" # replace with form template
+  else:
     token=get_api_key()
-    ret = addWorker(token, request.form['num'])
+    ret = addWorker(token,request.form['num'])
     return ret
+
 
 def addWorker(token, num):
     with open('payload.json') as p:
