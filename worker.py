@@ -38,7 +38,7 @@ def add():
   #if request.method=='GET':
   #  return render_template('index.html')
   #else:
-    token=access_secret_version("compute-api-key")
+    token=get_api_key()
     ret = addWorker(token, request.form['num'])
     return ret
 
