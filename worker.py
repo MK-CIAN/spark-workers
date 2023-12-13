@@ -13,7 +13,7 @@ def get_api_key() -> str:
     
     client = secretmanager.SecretManagerServiceClient()
     
-    name = f"projects/655129271851/secrets/compute-api-key/versions/1"
+    name = "projects/655129271851/secrets/compute-api-key/versions/1"
     response = client.access_secret_version(name=name)
     
     return response.payload.data.decode("UTF-8")
