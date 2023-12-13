@@ -3,96 +3,66 @@
   "confidentialInstanceConfig": {
     "enableConfidentialCompute": false
   },
-  "cpuPlatform": "Unknown CPU Platform",
-  "creationTimestamp": "2023-12-12T09:48:11.110-08:00",
   "deletionProtection": false,
   "description": "",
   "disks": [
     {
-      "architecture": "X86_64",
-      "guestOsFeatures": [
-        {
-          "type": "UEFI_COMPATIBLE"
-        },
-        {
-          "type": "VIRTIO_SCSI_MULTIQUEUE"
-        },
-        {
-          "type": "GVNIC"
-        },
-        {
-          "type": "SEV_CAPABLE"
-        }
-      ],
-      "type": "PERSISTENT",
-      "licenses": [
-        "projects/debian-cloud/global/licenses/debian-11-bullseye"
-      ],
-      "deviceName": "slave1",
       "autoDelete": true,
-      "source": "projects/even-trainer-401512/zones/europe-west1-b/disks/slave1",
-      "index": 0,
       "boot": true,
-      "kind": "compute#attachedDisk",
+      "deviceName": "slave",
+      "diskEncryptionKey": {},
+      "initializeParams": {
+        "diskSizeGb": "15",
+        "diskType": "projects/even-trainer-401512/zones/europe-west1-b/diskTypes/pd-standard",
+        "labels": {},
+        "sourceImage": "projects/ubuntu-os-cloud/global/images/ubuntu-2004-focal-v20231130"
+      },
       "mode": "READ_WRITE",
-      "interface": "SCSI",
-      "diskSizeGb": "10"
+      "type": "PERSISTENT"
     }
   ],
   "displayDevice": {
     "enableDisplay": false
   },
-  "fingerprint": "icnR93UtZPQ=",
-  "id": "5952633884370084405",
-  "keyRevocationActionType": "NONE",
-  "kind": "compute#instance",
-  "labelFingerprint": "42WmSpB8rSM=",
-  "lastStartTimestamp": "2023-12-12T09:48:18.054-08:00",
-  "lastStopTimestamp": "2023-12-12T10:34:29.966-08:00",
+  "guestAccelerators": [],
+  "instanceEncryptionKey": {},
+  "keyRevocationActionType": "STOP",
+  "labels": {
+    "goog-ec-src": "vm_add-rest"
+  },
   "machineType": "projects/even-trainer-401512/zones/europe-west1-b/machineTypes/e2-medium",
   "metadata": {
-    "fingerprint": "WKsYMQUksHQ=",
-    "kind": "compute#metadata",
     "items": [
       {
-        "value": "apt update\ncurl -L --output spark-3.5.0-bin-hadoop3.tgz https://dlcdn.apache.org/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz\napt -y install default-jdk\ntar -xzvf spark-3.5.0-bin-hadoop3.tgz\n./spark-3.5.0-bin-hadoop3/sbin/start-slave.sh spark://spark-master.europe-west1-b.c.even-trainer-401512.internal:7077",
-        "key": "startup-script"
+        "key": "startup-script",
+        "value": "sudo apt update\ncurl -L --output spark-3.5.0-bin-hadoop3.tgz https://dlcdn.apache.org/spark/spark-3.5.0/spark-3.5.0-bin-hadoop3.tgz\napt -y install default-jdk\ntar -xzvf spark-3.5.0-bin-hadoop3.tgz\n./spark-3.5.0-bin-hadoop3/sbin/start-slave.sh spark://spark-master.europe-west1-b.c.even-trainer-401512.internal:7077 "
       }
     ]
   },
   "name": "slave1",
   "networkInterfaces": [
     {
-      "stackType": "IPV4_ONLY",
-      "name": "nic0",
-      "network": "projects/even-trainer-401512/global/networks/default",
       "accessConfigs": [
         {
           "name": "External NAT",
-          "type": "ONE_TO_ONE_NAT",
-          "kind": "compute#accessConfig",
           "networkTier": "PREMIUM"
         }
       ],
-      "subnetwork": "projects/even-trainer-401512/regions/europe-west1/subnetworks/default",
-      "networkIP": "10.132.0.3",
-      "fingerprint": "RWK1ZGyqCpk=",
-      "kind": "compute#networkInterface"
+      "stackType": "IPV4_ONLY",
+      "subnetwork": "projects/even-trainer-401512/regions/europe-west1/subnetworks/default"
     }
   ],
+  "params": {
+    "resourceManagerTags": {}
+  },
   "reservationAffinity": {
     "consumeReservationType": "ANY_RESERVATION"
   },
-  "resourceStatus": {
-    "scheduling": {}
-  },
   "scheduling": {
-    "onHostMaintenance": "MIGRATE",
-    "provisioningModel": "STANDARD",
     "automaticRestart": true,
-    "preemptible": false
+    "onHostMaintenance": "MIGRATE",
+    "provisioningModel": "STANDARD"
   },
-  "selfLink": "projects/even-trainer-401512/zones/europe-west1-b/instances/slave1",
   "serviceAccounts": [
     {
       "email": "655129271851-compute@developer.gserviceaccount.com",
@@ -107,25 +77,12 @@
     }
   ],
   "shieldedInstanceConfig": {
+    "enableIntegrityMonitoring": true,
     "enableSecureBoot": false,
-    "enableVtpm": true,
-    "enableIntegrityMonitoring": true
+    "enableVtpm": true
   },
-  "shieldedInstanceIntegrityPolicy": {
-    "updateAutoLearnPolicy": true
-  },
-  "shieldedVmConfig": {
-    "enableSecureBoot": false,
-    "enableVtpm": true,
-    "enableIntegrityMonitoring": true
-  },
-  "shieldedVmIntegrityPolicy": {
-    "updateAutoLearnPolicy": true
-  },
-  "startRestricted": false,
-  "status": "TERMINATED",
   "tags": {
-    "fingerprint": "42WmSpB8rSM="
+    "items": []
   },
   "zone": "projects/even-trainer-401512/zones/europe-west1-b"
 }
